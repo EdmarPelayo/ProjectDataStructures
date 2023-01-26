@@ -77,7 +77,7 @@ public class Main {
             System.out.println("Nice job!");
             System.out.println("On the table next to where your friend was laying at, you find the passwords for the exits:");
             System.out.println("**********************************************************************");
-            System.out.println("[Password Set for Entrances]\n" +
+            System.out.println("[Password Set for Exits]\n" +
                     "1st Cabin: " +EXIT_PASSWORDS[0] + "\n" +
                     "2nd Cabin: " +EXIT_PASSWORDS[1] + "\n" +
                     "3rd Cabin: " +EXIT_PASSWORDS[2] + "\n" +
