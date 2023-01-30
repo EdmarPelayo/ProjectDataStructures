@@ -1,18 +1,41 @@
 package org.example;
 
-import org.example.Merchant;
-
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static Random rand = new Random();
-    public static void main(String[] args) {
-        System.out.println("Hello there, welcome to the Kingdom of Data Structures and Algorithms! ");
+    static File typingSound,ShopingMusic;
+    static AudioInputStream TypeStream,ShopStream;
+    static Clip type,shop;
+    public static Draw artist;
+    public static Colors colors;
+    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        typingSound = new File("/Users/edmarpelayo/Desktop/Code Differently Labs/newDSA/newDSAProject/src/main/java/org/example/typeSoundEffect.wav");
+        TypeStream = AudioSystem.getAudioInputStream(typingSound);
+        type = AudioSystem.getClip();
+        type.open(TypeStream);
 
-        System.out.println("A) Recursion \nB)HashMap\nC)LinkedList\nD)Array\nE)Stack\nF)Quit");
-        System.out.println("What would you like to learn today? : ");
+        ShopingMusic = new File("/Users/edmarpelayo/Desktop/Code Differently Labs/newDSA/newDSAProject/src/main/java/org/example/shoppingMusic.wav");
+        ShopStream = AudioSystem.getAudioInputStream(ShopingMusic);
+        shop = AudioSystem.getClip();
+        shop.open(ShopStream);
+
+        String[] introdcution = {
+            "Hello there, Welcome to the Kingdom of Data Structures and Algorithms! ",
+            "\nWhat would you like to learn about today?",
+
+        };
+
+        for(String phrase : introdcution){
+            write(phrase,colors.YELLOW_BOLD_BRIGHT);
+        }
+        write("\nA) Recursion \nB)HashMap\nC)LinkedList\nD)Array\nE)Stack\nF)Quit!",colors.WHITE_BOLD_BRIGHT);
+        write("\nWhat would you like to learn today? : ",colors.YELLOW_BOLD_BRIGHT);
 
         String learning = scanner.nextLine();
         while(!learning.equals("F")){
@@ -34,57 +57,85 @@ public class Main {
                     stackRomir();
                     break;
                 case "F":
+                    learning = "F";
                     break;
                 default:
-                    System.out.println("I don't know what you mean, so I'm ignoring you out of the Kingdom");
+                    write("I don't know what you mean, so I'm ignoring you out of the Kingdom",colors.RED);
+                    break;
             }
-            System.out.println("What would you like to learn today? : ");
-            System.out.println("A) Recursion \nB)HashMap\nC)LinkedList\nD)Array\nE)Stack\nF)Quit");
+            write("What would you like to learn today? : ",colors.GREEN);
+            write("A) Recursion \nB)HashMap\nC)LinkedList\nD)Array\nE)Stack\nF)Quit","");
             learning = scanner.nextLine();
         }
-        System.out.println("Have a Great Day! Hope you have a great day!");
-        merchantListCreation();
+        write("Have a Great Day! Hope you have a great day!",colors.YELLOW);
+    }
+
+
+    public static void write(String phrase, String desireColor) throws LineUnavailableException, IOException {
+        boolean printing = true;
+        type.loop(99);
+
+       for(int i = 0; i < phrase.length() - 1; i++){
+           System.out.print(desireColor + phrase.charAt(i) +
+                   colors.RESET);
+           try{
+               Thread.sleep(20);
+           }catch(InterruptedException e){
+               e.printStackTrace();
+           }
+       }
+
+       type.stop();
+
 
     }
 
-    static void searchMerchants(){
-        System.out.println("Welcome traveller. I heard you are about to venture out for glory. However, before you go I suggest you visit the Merchants in the town ");
-        System.out.println("The Merchants can provide you with everything that you may need in order to have a successful journey. However, I must warn you.");
-        System.out.println("The Merchants are not very bright. They only know the items they carry and the direction of another merchants. They don't know where every merchants is");
-        System.out.println("The Merchants should still all be connected though. By one merchants after another you should meet every merchants.");
-        System.out.println("\nWould you like to start browsing? y/n: ");
+    static void searchMerchants() throws LineUnavailableException, IOException {
+        String[] merchantIntro = {
+            "Welcome traveller. I heard you are about to Venture out for glory. However, before you go I suggest you visit the Merchants in the town.",
+            "The Merchants can provide you with everything that you may need in order to have a successful journey.",
+            "However, I must warn you, The Merchants are not very bright. They only know the items they carry and the direction of another merchants.",
+            "The Merchants should still all be connected though. By one merchants after another you should meet every merchants.",
+            "\nHere I'll let you borrow 1000 Gold Coins ,but I except you to pay me back plus interest when you become famoussC",
+            "Would you like to start browsing? y/n:\n "
+
+        };
+        for(String phrase : merchantIntro){
+            System.out.println();
+            write(phrase,colors.GREEN_BOLD_BRIGHT);
+        }
 
 
 
     }
-    static void merchantListCreation(){
-
+    static void merchantListCreation() throws LineUnavailableException, IOException {
+        shop.loop(99999);
         List<String> inventory =  new ArrayList();
         String[] phrases = {"Today seems like a good day to spend some money", "You look like you have some money, want to use it?",
                 "You look poor. Care to prove me wrong?", "I used to have a wife a kids, now I'm inside of a text-based java game"};
         String choice = null;
-        String dialogue = null;
-        int pocketMoney = 999;
+
+        int pocketMoney = 1000;
 
         //Linked List Creation
         Merchant merchants = new Merchant();
         merchants.head = new Merchant.ListNode(new Merchant.Item("Bag",10));
         Merchant.ListNode shield = new Merchant.ListNode(new Merchant.Item("Shield",40));
-        Merchant.ListNode shoeslaces = new Merchant.ListNode(new Merchant.Item("Shoe Laces",10));
-        Merchant.ListNode iPhoneCharger = new Merchant.ListNode(new Merchant.Item("iPhone Charger",8));
+        Merchant.ListNode boots = new Merchant.ListNode(new Merchant.Item("Boots",10));
+        Merchant.ListNode potion = new Merchant.ListNode(new Merchant.Item("potion",8));
         Merchant.ListNode Helmet = new Merchant.ListNode(new Merchant.Item("Helmet", 30));
-        Merchant.ListNode towel = new Merchant.ListNode(new Merchant.Item("Towel",12));
-        Merchant.ListNode shirt = new Merchant.ListNode(new Merchant.Item("shirt", 2));
+        Merchant.ListNode bow = new Merchant.ListNode(new Merchant.Item("Bow",12));
+        Merchant.ListNode arrow = new Merchant.ListNode(new Merchant.Item("arrow", 2));
         Merchant.ListNode sword = new Merchant.ListNode(new Merchant.Item("sword",50));
 
         //Linked List Connection
         merchants.head.next = shield;
-        shield.next = shoeslaces;
-        shoeslaces.next = iPhoneCharger;
-        iPhoneCharger.next = Helmet;
-        Helmet.next = towel;
-        towel.next = shirt;
-        shirt.next = sword;
+        shield.next = boots;
+        boots.next = potion;
+        potion.next = Helmet;
+        Helmet.next = bow;
+        bow.next = arrow;
+        arrow.next = sword;
         sword.next = null;
 
         searchMerchants();
@@ -95,30 +146,24 @@ public class Main {
             System.out.println("What about now?");
             answer = scanner.nextLine();
         }
-        //TODO: Fix Logic
-        /*
-        Add sounds
-            Possible Music
-            Sound Affects
-            current logic
-            ASCAII Art
-            need new Repo, to upload too
-            send out to teamMates
-         */
-        System.out.println("\n\nNice. Well then, I would like to introduce you to the first merchant.\n");
+
+        write("\nNice. Well then, I would like to introduce you to the first merchant.\n",colors.GREEN_BOLD_BRIGHT);
 
         Merchant.ListNode pointer = merchants.head;
+        int tracker = 0;
+        Draw picutres = new Draw();
         while(answer.equals("y") && pointer.next!=null){
-            choice = null;
 
-            System.out.print("Hello , ");
-            System.out.print(phrases[rand.nextInt(0,phrases.length)]);
-            System.out.print(". Would you like to buy a " + pointer.purchase.itemName + " ? y/n: " );
+            write("\n\nHello , ",colors.GREEN_BOLD_BRIGHT);
+            write(phrases[rand.nextInt(0,phrases.length)],colors.GREEN_BOLD_BRIGHT);
+            write(". Would you like to buy a " + pointer.purchase.itemName + " ? y/n:\n\n\n ",colors.GREEN_BOLD_BRIGHT );
+            System.out.println(colors.WHITE_BOLD_BRIGHT + picutres.itemDrawings[tracker]);
 
             choice = scanner.nextLine();
             if(choice.equals("y")){
-                System.out.println("Great here you go. Don't worry about the money. I'll just charge you after you find the gold ");
+                write("Great here you go. That will be " + pointer.purchase.itemCost, colors.GREEN_BOLD_BRIGHT);
                 inventory.add(pointer.purchase.itemName);
+                pocketMoney -= pointer.purchase.itemCost;
 
             }else{
                 System.out.println("Okay thats fine. Would like to keep shopping or are you done?: y/n:");
@@ -129,14 +174,17 @@ public class Main {
                     break;
                 }
             }
+            write("You have "+pocketMoney+ " gold coins left \n", colors.GREEN_BOLD_BRIGHT);
             pointer = pointer.next;
+            tracker = tracker + 1;
         }
-        System.out.println("Well, thanks for shopping today's");
-        System.out.print("Today, it seems that you bought ");
+        write("Well, thanks for shopping today's",colors.GREEN_BOLD_BRIGHT);
+        write("Today, it seems that you bought ",colors.GREEN_BOLD_BRIGHT);
         for(String word : inventory){
-            System.out.print(" a "+word+", ");
+            write(" a "+word+", ",colors.GREEN_BOLD_BRIGHT);
         }
-        System.out.println(" Have a good day");
+        write(" Have a good day",colors.GREEN_BOLD_BRIGHT);
+        shop.stop();
     }
     //TODO: Divine
     public static void HashMapDivine() {
