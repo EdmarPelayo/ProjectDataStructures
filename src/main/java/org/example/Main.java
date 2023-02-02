@@ -15,12 +15,12 @@ public class Main {
     public static Draw artist;
     public static Colors colors;
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        typingSound = new File("/Users/edmarpelayo/Desktop/Code Differently Labs/newDSA/newDSAProject/src/main/java/org/example/typeSoundEffect.wav");
+        typingSound = new File("/Users/jennychen/Desktop/project.nosync/ProjectDataStructures/src/main/java/org/example/typeSoundEffect.wav");
         TypeStream = AudioSystem.getAudioInputStream(typingSound);
         type = AudioSystem.getClip();
         type.open(TypeStream);
 
-        ShopingMusic = new File("/Users/edmarpelayo/Desktop/Code Differently Labs/newDSA/newDSAProject/src/main/java/org/example/shoppingMusic.wav");
+        ShopingMusic = new File("/Users/jennychen/Desktop/project.nosync/ProjectDataStructures/src/main/java/org/example/shoppingMusic.wav");
         ShopStream = AudioSystem.getAudioInputStream(ShopingMusic);
         shop = AudioSystem.getClip();
         shop.open(ShopStream);
@@ -244,17 +244,21 @@ public class Main {
                 "you have the passwords for the entrance doors, but the passwords for the exits are unknown. You\n" +
                 "have to continue using the passwords you have to enter the cabin using the entrance door until\n" +
                 "you reach the most inner cabin. And once you get there, you can save your friend and also get the\n" +
-                "password set for the exits. Good luck!",colors.GREEN_BOLD_BRIGHT);
+                "password set for the exits. Good luck!\n",colors.GREEN_BOLD_BRIGHT);
+
+        Draw picutres = new Draw();
+
+        System.out.println(colors.WHITE_BOLD_BRIGHT + picutres.itemDrawings[8]);
 
         // password set
-        write("**********************************************************************",colors.GREEN_BOLD_BRIGHT);
+        write("**********************************************************************\n",colors.GREEN_BOLD_BRIGHT);
         write("[Password Set for Entrances]\n" +
                 "1st Cabin: j2o4df\n" +
                 "2nd Cabin: (1st Cabin’s Password).subString(3) + “896”\n" +
                 "3rd Cabin: (2st Cabin’s Password)[1] + (1st Cabin’s Password)[0] + “038” + (2st Cabin’s Password)[(2st Cabin’s Password).length - 1]\n" +
                 "4th Cabin: “k38fw” + ((int) 5 / 6)\n" +
-                "5th Cabin: (3rd Cabin’s Password)[1] + (1st Cabin’s Password)[2] + “r” + (2nd Cabin’s Password)[1] + “an” + 53",colors.GREEN_BOLD_BRIGHT);
-        write("**********************************************************************",colors.GREEN_BOLD_BRIGHT);
+                "5th Cabin: (3rd Cabin’s Password)[1] + (1st Cabin’s Password)[2] + “r” + (2nd Cabin’s Password)[1] + “an” + 53\n",colors.GREEN_BOLD_BRIGHT);
+        write("**********************************************************************\n",colors.GREEN_BOLD_BRIGHT);
         recursiveMethod(scan, 1);
     }
     public static void stackRomir() throws LineUnavailableException, IOException {
@@ -290,59 +294,59 @@ public class Main {
     private static void recursiveMethod(Scanner scan, int doorNumber) throws LineUnavailableException, IOException {
         if (doorNumber <= 5) {
             String password = "";
-            write("You're standing in front of Cabin " + doorNumber + ".",colors.GREEN_BOLD_BRIGHT);
-            System.out.print("Enter the password for the entrance: ");
+            write("You're standing in front of Cabin " + doorNumber + ".\n",colors.GREEN_BOLD_BRIGHT);
+            write("Enter the password for the entrance:\n", colors.GREEN_BOLD_BRIGHT);
             password = scan.nextLine();
             while (true) {
                 if (password.equals(ENTRANCE_PASSWORDS[doorNumber - 1])) {
-                    write("Door opens successfully!",colors.GREEN_BOLD_BRIGHT);
+                    write("Door opens successfully!\n",colors.GREEN_BOLD_BRIGHT);
                     break;
                 } else {
-                    write("Wrong password! Please Try again!",colors.GREEN_BOLD_BRIGHT);
-                    System.out.print("Enter the password: ");
+                    write("Wrong password! Please Try again!\n",colors.GREEN_BOLD_BRIGHT);
+                    write("Enter the password:\n", colors.GREEN_BOLD_BRIGHT);
                     password = scan.nextLine();
                 }
             }
             write("",colors.GREEN_BOLD_BRIGHT);
             recursiveMethod(scan, doorNumber + 1);
         } else {
-            write("You've successfully entered the destination cabin!",colors.GREEN_BOLD_BRIGHT);
-            write("You see your best friend there and immediately go and untie the ropes on his/her hands and feet.",colors.GREEN_BOLD_BRIGHT);
-            write("Nice job!",colors.GREEN_BOLD_BRIGHT);
-            write("On the table next to where your friend was laying at, you find the passwords for the exits:",colors.GREEN_BOLD_BRIGHT);
-            write("**********************************************************************",colors.GREEN_BOLD_BRIGHT);
+            write("You've successfully entered the destination cabin!\n",colors.GREEN_BOLD_BRIGHT);
+            write("You see your best friend there and immediately go and untie the ropes on his/her hands and feet.\n",colors.GREEN_BOLD_BRIGHT);
+            write("Nice job!\n",colors.GREEN_BOLD_BRIGHT);
+            write("On the table next to where your friend was laying at, you find the passwords for the exits:\n",colors.GREEN_BOLD_BRIGHT);
+            write("**********************************************************************\n",colors.GREEN_BOLD_BRIGHT);
             write("[Password Set for Exits]\n" +
                     "1st Cabin: " +EXIT_PASSWORDS[0] + "\n" +
                     "2nd Cabin: " +EXIT_PASSWORDS[1] + "\n" +
                     "3rd Cabin: " +EXIT_PASSWORDS[2] + "\n" +
                     "4th Cabin: " +EXIT_PASSWORDS[3] + "\n",colors.GREEN_BOLD_BRIGHT);
-            write("**********************************************************************",colors.GREEN_BOLD_BRIGHT);
+            write("**********************************************************************\n",colors.GREEN_BOLD_BRIGHT);
             write("Pay attention to the order of the cabins!\n" +
-                    "You are now in the 5th cabin and is trying to exit through the 1st cabin!,",colors.GREEN_BOLD_BRIGHT);
+                    "You are now in the 5th cabin and is trying to exit through the 1st cabin!\n",colors.GREEN_BOLD_BRIGHT);
             write("",colors.GREEN_BOLD_BRIGHT);
             write("",colors.GREEN_BOLD_BRIGHT);
         }
 
         if (doorNumber - 2 >= 1)  {
             String password = "";
-            write("You're standing in front the exit that leads to Cabin " + (doorNumber - 2) + ".",colors.GREEN_BOLD_BRIGHT);
-            System.out.print("Enter the password for the exit: ");
+            write("You're standing in front the exit that leads to Cabin " + (doorNumber - 2) + "." + "\n",colors.GREEN_BOLD_BRIGHT);
+            write("Enter the password for the exit:\n", colors.GREEN_BOLD_BRIGHT);
             password = scan.nextLine();
             while (true) {
                 if (password.equals(EXIT_PASSWORDS[doorNumber - 3])) {
-                    write("Door opens successfully!",colors.GREEN_BOLD_BRIGHT);
+                    write("Door opens successfully!\n",colors.GREEN_BOLD_BRIGHT);
                     break;
                 } else {
-                    write("Wrong password! Please Try again!",colors.GREEN_BOLD_BRIGHT);
-                    System.out.print("Enter the password: ");
+                    write("Wrong password! Please Try again!\n",colors.GREEN_BOLD_BRIGHT);
+                    write("Enter the password: \n", colors.GREEN_BOLD_BRIGHT);
                     password = scan.nextLine();
                 }
             }
             write("",colors.GREEN_BOLD_BRIGHT);
         } else {
-            write("Congrats! You have just escaped from the cabin series!!!!!!!",colors.GREEN_BOLD_BRIGHT);
-            write("Now you and your best can go back home together!",colors.GREEN_BOLD_BRIGHT);
-            write("NICE JOB!!",colors.GREEN_BOLD_BRIGHT);
+            write("Congrats! You have just escaped from the cabin series!!!!!!!\n",colors.GREEN_BOLD_BRIGHT);
+            write("Now you and your best can go back home together!\n",colors.GREEN_BOLD_BRIGHT);
+            write("NICE JOB!!\n",colors.GREEN_BOLD_BRIGHT);
         }
     }
 
